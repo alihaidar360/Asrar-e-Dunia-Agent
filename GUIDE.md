@@ -15,7 +15,21 @@ order mein follow karo — kisi step ko skip mat karo.
 
 ---
 
-## STEP 1: Zaroori Software Install Karo
+## Zip Mein 3 Folders Khali Kyun Hain (Ye Normal Hai)
+
+Jab tum zip extract karo ge, ye 3 folders khali milenge — **ye galti nahi hai**,
+har folder ke andar ek README.txt hai jo batati hai kya karna hai:
+
+- `assets/output/` — Agent khud yahan videos/thumbnails generate karega jab chalega
+- `assets/music/` — Tumhe khud ek royalty-free music file yahan daalni hai (Step 6 dekho)
+- `assets/fonts/` — Tumhe khud ek proper Urdu Nastaliq font yahan daalni hai (Step 6 dekho)
+- `data/` — Database khud ban jayega jab tum `python3 database.py` chalao ge
+
+Baaki sab `.py` files mein poora working code hai — wo khali nahi hain.
+
+---
+
+
 
 Apne computer (Windows/Mac/Linux) par ye cheezein install karo:
 
@@ -123,10 +137,18 @@ Jo keys nahi hain unhe khali chhod do — system automatically agle tier par cha
 
 1. `assets/music/` folder mein ek royalty-free music file rakho, naam do:
    `default_background.mp3`
-   (YouTube Audio Library ya Pixabay Music se free le sakte ho)
+   (YouTube Audio Library ya Pixabay Music se free le sakte ho — detail us
+   folder ke andar README.txt mein hai)
 
-2. `assets/fonts/` folder mein ek Urdu font (.ttf) rakho, naam do: `urdu_font.ttf`
-   (Google Fonts par "Noto Nastaliq Urdu" free available hai)
+2. `assets/fonts/` folder mein ek proper Urdu Nastaliq font (.ttf) rakho, naam do:
+   `urdu_font.ttf`
+
+   Do achay free options:
+   - **Noto Nastaliq Urdu** (Google Fonts): fonts.google.com/noto/specimen/Noto+Nastaliq+Urdu
+   - **Jameel Noori Nastaliq** (search karke download karo) — zyada traditional look
+
+   ⚠️ Is font ke bina thumbnails, Shorts hook-text, aur subtitles kaam nahi karenge
+   (ya bohat generic dikhenge) — ye step skip mat karna.
 
 ---
 
