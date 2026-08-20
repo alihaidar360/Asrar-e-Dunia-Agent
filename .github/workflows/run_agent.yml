@@ -1,0 +1,53 @@
+name: Asrar-e-Dunia Agent
+
+on:
+  schedule:
+    - cron: "0 9 * * *"
+  workflow_dispatch:
+
+jobs:
+  run-agent:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+
+    steps:
+      - name: Repo checkout karo
+        uses: actions/checkout@v4
+
+      - name: Python setup karo
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: FFmpeg install karo
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+
+      - name: Python libraries install karo
+        run: pip install -r requirements.txt
+
+      - name: Agent chalao (main.py)
+        env:
+          CLAUDE_API_KEY: ${{ secrets.CLAUDE_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+          PLAYHT_API_KEY: ${{ secrets.PLAYHT_API_KEY }}
+          PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
+          PIXABAY_API_KEY: ${{ secrets.PIXABAY_API_KEY }}
+          RUNWAY_API_KEY: ${{ secrets.RUNWAY_API_KEY }}
+          PIKA_API_KEY: ${{ secrets.PIKA_API_KEY }}
+          YOUTUBE_DATA_API_KEY: ${{ secrets.YOUTUBE_DATA_API_KEY }}
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+        run: python3 main.py
+
+      - name: Bhari video files hatao (repo mein commit nahi karni)
+        run: rm -rf assets/output/*.mp4 assets/output/*.mp3 assets/output/**/*.mp4 2>/dev/null || true
+
+      - name: Database wapas repo mein save karo (agent ki "memory")
+        run: |
+          git config user.name "Asrar-e-Dunia Agent"
+          git config user.email "agent@asrar-e-dunia.local"
+          git add data/agent_memory.db
+          git diff --staged --quiet || git commit -m "Agent memory update - $(date -u +'%Y-%m-%d %H:%M UTC')"
+          git push
