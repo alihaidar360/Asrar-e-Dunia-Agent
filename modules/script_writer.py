@@ -80,6 +80,20 @@ def generate_script_gemini(topic_title: str, api_key: str, target_minutes: int =
             text = text[4:]
     return json.loads(text.strip())
 
+
+def generate_script_local_llama(topic_title: str, target_minutes: int = 25):
+    """Tier 3: Local Ollama/Llama model se script generate karta hai (hamesha available, unlimited)."""
+    import ollama
+    response = ollama.chat(
+        model="llama3",
+        messages=[
+            {"role": "system", "content": SYSTEM_PROMPT},
+            {"role": "user", "content": _build_user_prompt(topic_title, target_minutes)},
+        ],
+    )
+    return json.loads(response["message"]["content"])
+
+
 def generate_script(topic_title: str, target_minutes: int = 25):
     """
     Master function: Tier order (config.SCRIPT_WRITER_TIERS) ke mutabiq
