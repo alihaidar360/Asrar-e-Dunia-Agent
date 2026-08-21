@@ -64,25 +64,21 @@ def generate_script_claude(topic_title: str, api_key: str, target_minutes: int =
 
 def generate_script_gemini(topic_title: str, api_key: str, target_minutes: int = 25):
     """Tier 2: Google Gemini se script generate karta hai (fallback)."""
-    import google.generativeai as genai
-    genai.configure(api_key=api_key)
-    model = genai.GenerativeModel("gemini-1.5-pro", system_instruction=SYSTEM_PROMPT)
-    response = model.generate_content(_build_user_prompt(topic_title, target_minutes))
-    return json.loads(response.text)
+    from google import genai
+    from google.genai import types
 
-
-def generate_script_local_llama(topic_title: str, target_minutes: int = 25):
-    """Tier 3: Local Ollama/Llama model se script generate karta hai (hamesha available, unlimited)."""
-    import ollama
-    response = ollama.chat(
-        model="llama3",
-        messages=[
-            {"role": "system", "content": SYSTEM_PROMPT},
-            {"role": "user", "content": _build_user_prompt(topic_title, target_minutes)},
-        ],
+    client = genai.Client(api_key=api_key)
+    response = client.models.generate_content(
+        model="gemini-2.5-flash",
+        contents=_build_user_prompt(topic_title, target_minutes),
+        config=types.GenerateContentConfig(system_instruction=SYSTEM_PROMPT),
     )
-    return json.loads(response["message"]["content"])
-
+    text = response.text.strip()
+    if text.startswith("```"):
+        text = text.split("```")[1]
+        if text.startswith("json"):
+            text = text[4:]
+    return json.loads(text.strip())
 
 def generate_script(topic_title: str, target_minutes: int = 25):
     """
