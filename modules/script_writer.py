@@ -69,7 +69,7 @@ def generate_script_gemini(topic_title: str, api_key: str, target_minutes: int =
 
     client = genai.Client(api_key=api_key)
     response = client.models.generate_content(
-        model="gemini-2.5-flash",
+        model="gemini-3.6-flash",
         contents=_build_user_prompt(topic_title, target_minutes),
         config=types.GenerateContentConfig(system_instruction=SYSTEM_PROMPT),
     )
