@@ -13,20 +13,13 @@ edge-tts>=6.1.0
 
 # Voiceover (Tier 1/2 - optional, only if you have API keys)
 elevenlabs>=1.0.0
-# pyht  # PlayHT SDK - uncomment agar use karna ho
 
 # Script Writing (Tier 1/2/3 - optional based on which tier you use)
 anthropic>=0.30.0
-google-generativeai>=0.5.0
+google-genai>=0.3.0
 ollama>=0.2.0
-
-# Visuals (AI generation - optional)
-# runwayml  # uncomment agar Runway ML use karna ho
 
 # YouTube Upload
 google-api-python-client>=2.130.0
 google-auth-oauthlib>=1.2.0
 google-auth-httplib2>=0.2.0
-
-# NOTE: FFmpeg khud is list mein nahi hai kyunki ye Python package nahi -
-# system-level install karni hogi (GUIDE.md mein instructions hain)
