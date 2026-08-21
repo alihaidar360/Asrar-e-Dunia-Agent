@@ -1,4 +1,6 @@
 name: Asrar-e-Dunia Agent
+permissions:
+  contents: write
 
 on:
   schedule:
